@@ -1,0 +1,32 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: msa-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: msa-advertising-api
+          uri: lb://msa-advertising-api
+          predicates:
+            - Path=/api/advertising/**
+
+
+        - id: msa-news-api
+          #          uri : http://localhost:8005/
+          uri: lb://msa-news-api
+          predicates:
+            - Path=/api/news/**
+
+
+        - id: msa-user-api
+          uri: lb://msa-user-api
+          predicates:
+            - Path=/**
+
+
+        - id: msa-review-api
+          uri: lb://msa-review-api
+          predicates:
+            - Path=/api/review/**
